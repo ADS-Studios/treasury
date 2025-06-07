@@ -5,25 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Treasury Printer</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Optional: Add a favicon -->
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a> <!-- Accessibility: Skip link -->
+
     <header>
-        <h1>CANARY FILMS TREASURY</h1>
-        <p>We can Print the world!!</p>
-        
-        <!-- Mode Toggle -->
-        <div class="mode-toggle">
-            <button id="receiptModeBtn" class="mode-btn mode-receipt active">Receipt Mode</button>
-            <button id="imageModeBtn" class="mode-btn mode-image">Image Mode</button>
+        <div class="header-content"> <!-- Container for better styling control -->
+            <h1>CANARY FILMS TREASURY</h1>
+            <p>We can Print the world!!</p>
+
+            <!-- Mode Toggle -->
+            <div class="mode-toggle">
+                <button id="receiptModeBtn" class="mode-btn mode-receipt active" aria-pressed="true">Receipt Mode</button>
+                <button id="imageModeBtn" class="mode-btn mode-image" aria-pressed="false">Image Mode</button>
+            </div>
         </div>
     </header>
 
-    <main>
+    <main id="main-content"> <!-- Added ID for skip link target -->
         <div class="panels">
             <!-- Receipt Mode Content -->
-            <div id="receiptModeContent" class="mode-content active">
+            <div id="receiptModeContent" class="mode-content active" aria-hidden="false">
                 <!-- Left Panel: Configuration -->
                 <section class="config-panel">
+                    <h2>Receipt Configuration</h2>  <!-- Added a Heading -->
                     <div class="config-section">
                         <h3>Business Information</h3>
                         <div class="input-group">
@@ -37,36 +43,39 @@ CANBERRA, ACT 2603</textarea>
                         </div>
                         <div class="input-group">
                             <label for="businessPhone">Email</label>
-                            <input type="text" id="businessPhone" value="admin@canaryfilms.org">
+                            <input type="email" id="businessPhone" value="admin@canaryfilms.org"> <!-- Changed to email type -->
                         </div>
                     </div>
-              
+
 
                     <div class="config-section">
                         <h3>Items</h3>
                         <div id="itemsList"></div>
-                        
+
                         <div class="item-entry">
                             <div class="flex-row">
                                 <div class="input-group">
+                                    <label for="newItemName" class="visually-hidden">Item Name</label> <!-- Accessibility: Hidden Label -->
                                     <input type="text" id="newItemName" placeholder="Item name">
                                 </div>
                                 <div class="input-group input-group-small">
+                                    <label for="newItemPrice" class="visually-hidden">Item Price</label> <!-- Accessibility: Hidden Label -->
                                     <input type="number" id="newItemPrice" placeholder="0.00" step="0.01">
                                 </div>
                                 <button id="addItemBtn" class="btn-primary">Add</button>
                             </div>
                         </div>
                     </div>
-                    
-                    
+
+
                     <div class="config-section">
                         <h3>Footer</h3>
                         <div class="input-group">
+                            <label for="footerMessage">Footer Message</label> <!-- Added Label -->
                             <textarea id="footerMessage" rows="3">Treasury has been updated!</textarea>
                         </div>
                     </div>
-                    
+
                     <div class="action-buttons">
                         <button id="resetBtn" class="btn-secondary">Reset</button>
                         <button id="connectReceiptBtn" class="btn btn-primary connect-btn">Connect Printer</button>
@@ -76,10 +85,11 @@ CANBERRA, ACT 2603</textarea>
 
                 <!-- Right Panel: Receipt Preview -->
                 <section class="preview-panel">
+                    <h2>Receipt Preview</h2> <!-- Added a Heading -->
                     <div class="preview-header">
-                        <h2>Print Preview</h2>
+                        <h3>Preview</h3>
                     </div>
-                    
+
                     <div class="receipt-wrapper">
                         <div class="receipt-container" id="receiptContainer">
                             <div class="receipt" id="receiptPreview">
@@ -92,11 +102,12 @@ CANBERRA, ACT 2603</textarea>
                     </div>
                 </section>
             </div>
-            
+
             <!-- Image Mode Content -->
-            <div id="imageModeContent" class="mode-content">
+            <div id="imageModeContent" class="mode-content" aria-hidden="true">
                 <!-- Left Panel: Image Configuration -->
                 <section class="config-panel image-config-panel">
+                    <h2>Image Configuration</h2> <!-- Added a Heading -->
                     <div class="config-section">
                         <h3>Image Source</h3>
                         <div class="input-group">
@@ -118,7 +129,7 @@ CANBERRA, ACT 2603</textarea>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="config-section">
                         <h3>Image Processing</h3>
                         <div class="input-group">
@@ -141,7 +152,7 @@ CANBERRA, ACT 2603</textarea>
                             <input type="checkbox" id="imageInvert">
                         </div>
                     </div>
-                    
+
                     <div class="config-section">
                         <h3>Size & Positioning</h3>
                         <div class="input-group">
@@ -157,7 +168,7 @@ CANBERRA, ACT 2603</textarea>
                             <input type="number" id="imagePadding" value="10" min="0" max="100" step="1">
                         </div>
                     </div>
-                    
+
                     <div class="action-buttons">
                         <button id="resetImageBtn" class="btn-secondary">Reset</button>
                         <button id="connectImageBtn" class="btn btn-primary connect-btn">Connect Printer</button>
@@ -167,10 +178,11 @@ CANBERRA, ACT 2603</textarea>
 
                 <!-- Right Panel: Image Preview -->
                 <section class="preview-panel image-preview-panel">
+                   <h2>Image Preview</h2> <!-- Added a Heading -->
                     <div class="preview-header">
-                        <h2>Print Preview</h2>
+                        <h3>Preview</h3>
                     </div>
-                    
+
                     <div class="image-wrapper" id="dropZone">
                         <div class="image-container" id="imageContainer">
                             <canvas id="imagePreview"></canvas>
@@ -189,11 +201,11 @@ CANBERRA, ACT 2603</textarea>
                     <h2>Printer Log</h2>
                     <button id="clearLogBtn">Clear Log</button>
                 </div>
-                
+
                 <div class="log-wrapper" id="logWrapper">
                     <!-- Log entries will be added here -->
                 </div>
-                
+
                 <div class="progress-container" id="printProgress">
                     <div class="progress-bar" id="printProgressBar"></div>
                 </div>
